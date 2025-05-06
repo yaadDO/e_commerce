@@ -1,34 +1,22 @@
-import 'package:e_commerce/presentation/features/cart/cart_bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:e_commerce/pages/intro_page.dart';
+import 'package:e_commerce/themes/light_mode.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'data/repositories/product_repository_impl.dart';
-import 'presentation/features/auth/auth_bloc.dart';
-import 'presentation/features/products/product_bloc.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => AuthBloc(AuthRepositoryImpl())),
-        BlocProvider(create: (_) => CartBloc(CartRepositoryImpl())),
-        BlocProvider(create: (_) => ProductBloc(ProductRepositoryImpl())),
-      ],
-      child: MaterialApp.router(
-        title: 'E-Commerce App',
-        theme: AppTheme.light,
-        routerConfig: AppRouter.router,
-      ),
+    return MaterialApp(
+     debugShowCheckedModeBanner: false,
+      home: IntroPage(),
+      theme: lightMode,
     );
   }
 }
+
